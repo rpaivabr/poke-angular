@@ -1,0 +1,35 @@
+<mat-card class="card" *ngIf="pokemon">
+  <mat-card-header>
+    <mat-card-title class="card-title">{{pokemon.name}}</mat-card-title>
+    <mat-card-subtitle>
+      #{{pokemon.order.toString().padStart(3, '0')}}
+      <span
+        *ngFor="let type of pokemon.types"
+        class="type {{type}}"
+      >
+        {{ type }}
+      </span>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <img alt="Pokemon selected" mat-card-image [src]="pokemon.imageUrl" />
+
+  <mat-card-actions class="card-actions" *ngIf="actions">
+    <button
+      mat-icon-button
+      color="accent"
+      aria-label="Edit pokemon"
+      (click)="editPokemon(pokemon.id!)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="warn"
+      aria-label="Delete pokemon"
+      (click)="deletePokemon(pokemon.id!)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

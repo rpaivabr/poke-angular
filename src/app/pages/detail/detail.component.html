@@ -8,22 +8,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-card class="card" *ngIf="pokemonSelected">
-    <mat-card-header>
-      <mat-card-title class="card-title">{{pokemonSelected.name}}</mat-card-title>
-      <mat-card-subtitle>
-        #{{pokemonSelected.order.toString().padStart(3, '0')}}
-        <span
-          *ngFor="let type of pokemonSelected.types"
-          class="type {{type}}"
-        >
-          {{ type }}
-        </span>
-      </mat-card-subtitle>
-    </mat-card-header>
-
-    <img alt="Pokemon selected" mat-card-image [src]="pokemonSelected.imageUrl" />
-  </mat-card>
+  <app-card [pokemon]="pokemonSelected"></app-card>
 
   <button
     mat-raised-button
