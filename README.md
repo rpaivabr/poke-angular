@@ -16,12 +16,12 @@ Para isso, temos a dependência de desenvolvimento já instalada (json-server), 
 
 ## Features
 
-- [ ] Página `/list` mostrar os meus pokemons (json-server) e dar a opção de adicionar pokemon, caso não tenham 6 cadastrados (máximo)
-- [ ] Ao clicar em adicionar pokemon, ou pokemon já existente na lista, ir para a página `/detail/:id`
-- [ ] Para editar ou adicionar, apresentar um select, e preencher com os dados vindos da PokeAPI. Ex: `https://pokeapi.co/api/v2/pokemon?limit=151` para trazer os nomes dos primeiros 151 pokemons.
-- [ ] Ao selecionar um pokemon no select, consultar a PokeAPI com o id (Ex: `https://pokeapi.co/api/v2/pokemon/25` para Pikachu), e mostrar as informações em um card que preferir (nome, foto, tipo etc.)
-- [ ] Ao confirmar, caso esteja adicionando um novo, salvar (POST) ou atualizar (PUT) na api local (json-server)
+- [x] Página `/list` mostrar os meus pokemons (json-server) e dar a opção de adicionar pokemon, caso não tenham 6 cadastrados (máximo)
+- [x] Ao clicar em adicionar pokemon, ou pokemon já existente na lista, ir para a página `/detail/:id`
+- [x] Para editar ou adicionar, apresentar um select, e preencher com os dados vindos da PokeAPI. Ex: `https://pokeapi.co/api/v2/pokemon?limit=151` para trazer os nomes dos primeiros 151 pokemons.
+- [x] Ao selecionar um pokemon no select, consultar a PokeAPI com o id (Ex: `https://pokeapi.co/api/v2/pokemon/25` para Pikachu), e mostrar as informações em um card que preferir (nome, foto, tipo etc.)
+- [x] Ao confirmar, caso esteja adicionando um novo, salvar (POST) ou atualizar (PUT) na api local (json-server)
 
 ## Extra Features
-- [ ] Não permitir quando for adicionar um novo pokemon, que ele seja do mesmo tipo que você já tenha na sua lista
-- [ ] Utilizar qualquer melhoria visual (html e css), para criar uma experiência incrível (usem a criatividade)!
+- [x] Não permitir quando for adicionar um novo pokemon, que ele seja do mesmo tipo que você já tenha na sua lista
+- [x] Utilizar qualquer melhoria visual (html e css), para criar uma experiência incrível (usem a criatividade - FOI SEM CRIATIVIDADE MESMO MAS OK)!

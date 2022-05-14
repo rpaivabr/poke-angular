@@ -1,0 +1,8 @@
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  flex-wrap: wrap;
+}

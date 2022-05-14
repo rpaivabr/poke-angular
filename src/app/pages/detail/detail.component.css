@@ -1,0 +1,12 @@
+.container {
+  flex-direction: column;
+}
+
+.field {
+  width: 230px;
+}
+
+.message {
+  color: red;
+  font-size: 12px;
+}

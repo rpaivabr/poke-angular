@@ -1,4 +1,41 @@
-<p>list works!</p>
-<a routerLink="/detail/new">New Pokemon</a>
-<br>
-<a href="#" (click)="goToDetail($event, 1)">Edit Pokemon 1</a>
+<div class="container" *ngIf="(myPokemons$ | async) as myPokemons">
+  <mat-card class="card" *ngFor="let pokemon of myPokemons; index as i">
+    <mat-card-header>
+      <mat-card-title class="card-title">{{pokemon.name}}</mat-card-title>
+      <mat-card-subtitle>
+        #{{pokemon.order.toString().padStart(3, '0')}}
+        <span
+        *ngFor="let type of pokemon.types"
+        class="type {{type}}"
+      >
+        {{ type }}
+      </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="pokemon.imageUrl" alt="Pokemon {{i + 1}}">
+
+    <mat-card-actions class="card-actions">
+      <button mat-icon-button color="accent" aria-label="Edit pokemon" routerLink="/detail/{{pokemon.id}}">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Delete pokemon"
+        (click)="deletePokemon(pokemon.id!)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <button
+    *ngIf="myPokemons.length < 6"
+    mat-raised-button
+    color="accent"
+    routerLink="/detail/select"
+  >
+    Select new
+  </button>
+</div>

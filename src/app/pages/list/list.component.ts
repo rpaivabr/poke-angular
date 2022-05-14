@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ApiService, PokemonData } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-list',
@@ -7,15 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  myPokemons$!: Observable<PokemonData[]>
 
-  constructor(private router: Router) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.myPokemons$ = this.api.listAllPokemons();
   }
 
-  goToDetail(event: Event, id: number): void {
-    event.preventDefault();
-    this.router.navigate(['detail', id]);
+  deletePokemon(id: number) {
+    this.api.deletePokemon(id)
+      .subscribe(() => this.myPokemons$ = this.api.listAllPokemons());
   }
 
 }
