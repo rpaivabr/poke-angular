@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, PokemonData } from 'src/app/services/api.service';
 import { PokeApiResult, PokeapiService } from 'src/app/services/pokeapi.service';
@@ -22,6 +23,7 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private api: ApiService,
     private pokeApi: PokeapiService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +71,10 @@ export class DetailComponent implements OnInit {
       : this.api.createPokemon(this.pokemonSelected);
 
     savePokemon
-      .subscribe(() => this.router.navigate(['list']));
+      .subscribe(() => {
+        this.snackBar.open('Pokémon added');
+        this.router.navigate(['list'])
+      });
   }
 
   remove(): void {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService, PokemonData } from 'src/app/services/api.service';
@@ -13,7 +14,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,10 @@ export class ListComponent implements OnInit {
 
   deletePokemon(id: number): void {
     this.api.deletePokemon(id)
-      .subscribe(() => this.myPokemons$ = this.api.listAllPokemons());
+      .subscribe(() => {
+        this.snackBar.open('Pokémon removed');
+        this.myPokemons$ = this.api.listAllPokemons()
+      });
   }
 
   navigateTo(id: number): void {
