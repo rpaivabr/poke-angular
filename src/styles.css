@@ -11,14 +11,6 @@ body {
   background: rgb(250, 224, 224);
 }
 
-.card {
-  width: 200px;
-}
-
-.card-title {
-  text-transform: capitalize;
-}
-
 .container {
   display: flex;
   justify-content: center;

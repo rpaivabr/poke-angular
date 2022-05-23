@@ -1,16 +1,6 @@
 {
   "pokemons": [
     {
-      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-      "types": [
-        "grass",
-        "poison"
-      ],
-      "order": 1,
-      "name": "bulbasaur",
-      "id": 1
-    },
-    {
       "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
       "types": [
         "water"
@@ -18,6 +8,16 @@
       "order": 7,
       "name": "squirtle",
       "id": 3
+    },
+    {
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+      "types": [
+        "fire",
+        "flying"
+      ],
+      "order": 6,
+      "name": "charizard",
+      "id": 4
     }
   ]
 }

@@ -13,7 +13,6 @@ export interface PokeApiSearchData {
 
 export interface PokeApiResult {
   name: string;
-  imageUrl: string;
 }
 
 export interface PokeApiData {

@@ -3,15 +3,18 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, PokemonData } from 'src/app/services/api.service';
-import { PokeApiResult, PokeapiService } from 'src/app/services/pokeapi.service';
+import {
+  PokeApiResult,
+  PokeapiService,
+} from 'src/app/services/pokeapi.service';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css']
+  styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent implements OnInit {
-  pokemonList!: PokeApiResult[]
+  pokemonList!: PokeApiResult[];
   pokemonSelected!: PokemonData;
   pokemonControl!: FormControl;
   idToEdit!: number | null;
@@ -30,21 +33,22 @@ export class DetailComponent implements OnInit {
     this.idToEdit = null;
     this.pokemonControl = this.fb.control('');
 
-    this.pokemonControl.valueChanges.subscribe(name => {
+    this.pokemonControl.valueChanges.subscribe((name) => {
       this.selectPokemon(name);
     });
 
-    this.pokeApi.getPokemons()
-      .subscribe(results => this.pokemonList = results);
+    this.pokeApi
+      .getPokemons()
+      .subscribe((results) => (this.pokemonList = results));
 
-    this.api.listAllPokemons().subscribe(myPokemons => {
-      myPokemons.forEach(pokemon =>
-        this.notAllowedTypes = [...this.notAllowedTypes, ...pokemon.types]
-      )
-      console.log(this.notAllowedTypes);
-    })
+    this.api.listAllPokemons().subscribe((myPokemons) => {
+      myPokemons.forEach(
+        (pokemon) =>
+          (this.notAllowedTypes = [...this.notAllowedTypes, ...pokemon.types])
+      );
+    });
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.getPokemonToEdit(params['id']);
     });
   }
@@ -56,35 +60,38 @@ export class DetailComponent implements OnInit {
 
     let result = true;
 
-    this.pokemonSelected.types.forEach(type => {
+    this.pokemonSelected.types.forEach((type) => {
       if (this.notAllowedTypes.includes(type)) {
         result = false;
       }
-    })
+    });
 
     return result;
   }
 
   save(): void {
-    const savePokemon = this.idToEdit && this.idToEdit !== 0
-      ? this.api.updatePokemon({ id: this.idToEdit, ...this.pokemonSelected })
-      : this.api.createPokemon(this.pokemonSelected);
+    const savePokemon =
+      this.idToEdit && this.idToEdit !== 0
+        ? this.api.updatePokemon({ id: this.idToEdit, ...this.pokemonSelected })
+        : this.api.createPokemon(this.pokemonSelected);
 
-    savePokemon
-      .subscribe(() => {
+    savePokemon.subscribe({
+      next: () => {
         this.snackBar.open('Pokémon added');
-        this.router.navigate(['list'])
-      });
-  }
-
-  remove(): void {
-    this.api.deletePokemon(this.idToEdit!)
-      .subscribe(() => this.router.navigate(['list']));
+        this.router.navigate(['list']);
+      },
+      error: err => {
+        console.error(err);
+        this.snackBar.open('Error, try again later');
+        this.router.navigate(['list']);
+      }
+    });
   }
 
   private selectPokemon(name: string): void {
-    this.pokeApi.getPokemonByName(name)
-      .subscribe(pokemon => this.pokemonSelected = pokemon);
+    this.pokeApi
+      .getPokemonByName(name)
+      .subscribe((pokemon) => (this.pokemonSelected = pokemon));
   }
 
   private getPokemonToEdit(paramId: string): void {
@@ -94,20 +101,18 @@ export class DetailComponent implements OnInit {
     if (isNaN(id)) this.redirectToNotFound();
 
     this.api.getPokemonById(id).subscribe({
-      next: data => {
-        this.pokemonControl.setValue(data.name),
-        this.pokemonSelected = data;
+      next: (data) => {
+        this.pokemonControl.setValue(data.name), (this.pokemonSelected = data);
         this.idToEdit = id;
       },
-      error: err => {
+      error: (err) => {
         console.error(err);
         this.redirectToNotFound();
-      }
+      },
     });
   }
 
   private redirectToNotFound(): void {
-    this.router.navigate(['404'])
+    this.router.navigate(['404']);
   }
-
 }
